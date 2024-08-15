@@ -1,19 +1,40 @@
+from square import Square
 from pieces import *
 
-columns = {'a' : 1, 'b' : 2, 'c' : 3, 'd' : 4, 'e' : 5, 'f' : 6, 'g' : 7, 'h' : 8}
+class Board:
 
-p1 = Pawn(True, 2, 1)
-p2 = Pawn(True, 2, 2)
-p3 = Pawn(True, 2, 3)
-p4 = Pawn(True, 2, 4)
-p5 = Pawn(True, 2, 5)
-p6 = Pawn(True, 2, 6)
-p7 = Pawn(True, 2, 7)
-p8 = Pawn(True, 2, 8)
+    board = []
 
+    def create_board():
 
-board = [[ p1, p2, p3, p4, p5, p6, p7, p8],
-         ['.','.','.','.','.','.','.','.'],
-         ['.','.','.','.','.','.','.','.'],
-         ['.','.','.','.','.','.','.','.'],
-         ['.','.','.','.','.','.','.','.']]
+        line = [Square(0, 0 ,Rook(True)),
+                Square(0, 1 ,Knight(True)),
+                Square(0, 2 ,Bishop(True)),
+                Square(0, 3 ,Queen(True)),
+                Square(0, 4 ,King(True)),
+                Square(0, 5 ,Bishop(True)),
+                Square(0, 6 ,Knight(True)),
+                Square(0, 7 ,Rook(True))]
+        Board.board.append(line)
+
+        line = []
+        for i in range(8):
+            line.append(Square(6, i, Pawn(True)))
+        Board.board.append(line)
+
+        for i in range(2, 6):
+            line = []
+            for j in range(8):
+                line.append(Square(i, j))
+
+            Board.board.append(line)
+
+    def print_board():
+
+        for x in Board.board:
+            for y in x:
+                print(y, end=' ')
+            print()
+
+Board.create_board()
+Board.print_board()
