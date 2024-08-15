@@ -1,8 +1,11 @@
+class EmptySquare:
+
+    def possible_move(self, start, end):
+        return False
+
 class Square:
 
-    columns = {'a' : 1, 'b' : 2, 'c' : 3, 'd' : 4, 'e' : 5, 'f' : 6, 'g' : 7, 'h' : 8}
-
-    def __init__(self, x, y, piece = None) -> None:
+    def __init__(self, x, y, piece = EmptySquare) -> None:
 
         self.x = x
         self.y = y
