@@ -7,12 +7,19 @@ class Piece:
         self.iswhite = iswhite
         self.moved = False
         self.targeted = False
+        self.value = 0
         
 
 class Pawn(Piece):
 
     def __init__(self, iswhite) -> None:
         super().__init__(iswhite)
+
+        #Set value of the piece
+        if self.iswhite:
+            self.value = 1
+        else:
+            self.value = -1
 
     def __str__(self) -> str:
         if self.iswhite:
@@ -22,21 +29,24 @@ class Pawn(Piece):
     def possible_move(self, start : Square, end : Square):
         
         #Can't move if the square is ocupied
-        if end.piece.iswhite != self.iswhite:
+        if end.piece.iswhite == self.iswhite:
             return False
         
+        if start.y != end.y:
+            return False
+
         # Can only move in one direction
-        if self.iswhite:
-            if start.y - end.y == 1:
+        if not self.iswhite:
+            if start.x - end.x == 1:
                 return True
             # The first move can be two squares
-            if start.y - end.y == 1 and not self.moved:
+            if start.x - end.x == 1 and not self.moved:
                 return True
         else:
-            if end.y - start.y == 1:
+            if end.x - start.x == 2:
                 return True
             # The first move can be two squares
-            if end.y - start.y == 1 and not self.moved:
+            if end.x - start.x == 2 and not self.moved:
                 return True 
             
         # TODO en passant and capture
@@ -49,6 +59,11 @@ class Bishop(Piece):
     def __init__(self, iswhite) -> None:
         super().__init__(iswhite)
 
+        if self.iswhite:
+            self.value = 3
+        else:
+            self.value = -3
+
     def __str__(self) -> str:
         if self.iswhite:
             return "B"
@@ -57,7 +72,7 @@ class Bishop(Piece):
     def possible_move(self, start : Square, end : Square):
 
         #Can't move if the square is ocupied
-        if end.piece.iswhite != self.iswhite:
+        if end.piece.iswhite == self.iswhite:
             return False
         
         x = abs(start.x - end.x)
@@ -74,6 +89,12 @@ class Knight(Piece):
     def __init__(self, iswhite) -> None:
         super().__init__(iswhite)
 
+        #Set value of the piece
+        if self.iswhite:
+            self.value = 3
+        else:
+            self.value = -3
+
     def __str__(self) -> str:
         if self.iswhite:
             return 'N'
@@ -82,7 +103,7 @@ class Knight(Piece):
     def possible_move(self, start: Square, end: Square):
         
         #Can't move if the square is ocupied
-        if end.piece.iswhite != self.iswhite:
+        if end.piece.iswhite == self.iswhite:
             return False
         
         x = abs(start.x - end.x)
@@ -100,6 +121,12 @@ class Rook(Piece):
     def __init__(self, iswhite) -> None:
         super().__init__(iswhite)
 
+        #Set value of the piece
+        if self.iswhite:
+            self.value = 5
+        else:
+            self.value = -5
+
     def __str__(self) -> str:
 
         if self.iswhite:
@@ -109,7 +136,7 @@ class Rook(Piece):
     def possible_move(self, start, end):
 
         #Can't move if the square is ocupied
-        if end.piece.iswhite != self.iswhite:
+        if end.piece.iswhite == self.iswhite:
             return False
         
         x = abs(start.x - end.x)
@@ -126,6 +153,12 @@ class Queen(Piece):
     
     def __init__(self, iswhite) -> None:
         super().__init__(iswhite)
+
+        #Set value of the piece
+        if self.iswhite:
+            self.value = 9
+        else:
+            self.value = -9
 
     def __str__(self) -> str:
 
@@ -154,6 +187,12 @@ class King(Piece):
     def __init__(self, iswhite) -> None:
         super().__init__(iswhite)
 
+        #Set value of the piece
+        if self.iswhite:
+            self.value = 100
+        else:
+            self.value = -100
+
     def __str__(self) -> str:
 
         if self.iswhite:
@@ -163,7 +202,7 @@ class King(Piece):
     def possible_move(self, start: Square, end: Square):
         
         #Can't move if the square is ocupied
-        if end.piece.iswhite != self.iswhite:
+        if end.piece.iswhite == self.iswhite:
             return False
 
         #Check for regular movement

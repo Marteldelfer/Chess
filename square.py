@@ -1,7 +1,15 @@
 class EmptySquare:
 
-    def possible_move(self, start, end):
+    value = 0
+
+    def __str__() -> str:
+        return '.'
+    
+    def possible_move(start, end):
         return False
+
+    def iswhite():
+        return None
 
 class Square:
 
