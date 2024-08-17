@@ -132,6 +132,12 @@ def move_piece(start: Square, end: Square):
             Board.board[end.x][end.y] = Square(end.x, end.y, Bishop(start.piece.iswhite))
             Board.board[start.x][start.y] = Square(start.x, start.y)
 
+    #move the queen
+    if isinstance(start.piece, Queen):
+        if has_path_rook(start, end) or has_path_bishop(start, end):
+            Board.board[end.x][end.y] = Square(end.x, end.y, Queen(start.piece.iswhite))
+            Board.board[start.x][start.y] = Square(start.x, start.y)
+
 def main():
     Board.create_board()
 
