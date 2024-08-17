@@ -103,6 +103,7 @@ def has_path_rook(start: Square, end: Square):
     return True
 
 def has_path_bishop(start : Square, end : Square):
+    """Same as the has_path_rook, but for the bishop"""
 
     if not start.piece.possible_move(start, end):
         return False
@@ -117,6 +118,19 @@ def has_path_bishop(start : Square, end : Square):
     return True
 
 
+def move_piece(start: Square, end: Square):
+
+    #move the rook
+    if isinstance(start.piece, Rook):
+        if has_path_rook(start, end):
+            Board.board[end.x][end.y] = Square(end.x, end.y, Rook(start.piece.iswhite))
+            Board.board[start.x][start.y] = Square(start.x, start.y)
+
+    #move the bishop
+    if isinstance(start.piece, Bishop):
+        if has_path_bishop(start, end):
+            Board.board[end.x][end.y] = Square(end.x, end.y, Bishop(start.piece.iswhite))
+            Board.board[start.x][start.y] = Square(start.x, start.y)
 
 def main():
     Board.create_board()
@@ -124,10 +138,10 @@ def main():
     Board.board[1][0] = Square(1,0)
     Board.board[1][3] = Square(1,3)
     Board.board[6][3] = Square(6,3)
+    Board.board[6][1] = Square(6,1)
     Board.print_board()
 
-    print(has_path_rook(Board.board[0][0], Board.board[6][0]))
-    print(has_path_bishop(Board.board[7][2], Board.board[5][4]))
+    
 
 if __name__ == "__main__":
     main()

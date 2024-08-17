@@ -1,6 +1,8 @@
 class EmptySquare:
 
-    value = 0
+    def __init__(self) -> None:
+        self.iswhite = None
+        self.value = 0
 
     def __str__(self) -> str:
         return '.'
@@ -8,8 +10,6 @@ class EmptySquare:
     def possible_move(start, end):
         return False
 
-    def iswhite():
-        return None
 
 class Square:
 
