@@ -118,25 +118,60 @@ def has_path_bishop(start : Square, end : Square):
     return True
 
 
+def pawn_can_capture(start : Square, end : Square):
+
+    x = end.x - start.x
+    y = abs(end.y - start.y)
+
+    if not isinstance(end.piece, EmptySquare) and start.piece.iswhite != end.piece.iswhite:
+        if start.piece.iswhite and x == 1 and y == 1:
+            return True
+        elif not start.piece.iswhite and x == -1 and y == 1:
+            return True
+    return False
+
 def move_piece(start: Square, end: Square):
 
-    #move the rook
+    # Move the rook
     if isinstance(start.piece, Rook):
         if has_path_rook(start, end):
-            Board.board[end.x][end.y] = Square(end.x, end.y, Rook(start.piece.iswhite))
+            start.piece.moved = True
+            Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
 
-    #move the bishop
-    if isinstance(start.piece, Bishop):
+    # Move the bishop
+    elif isinstance(start.piece, Bishop):
         if has_path_bishop(start, end):
-            Board.board[end.x][end.y] = Square(end.x, end.y, Bishop(start.piece.iswhite))
+            Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
 
-    #move the queen
-    if isinstance(start.piece, Queen):
+    # Move the queen
+    elif isinstance(start.piece, Queen):
         if has_path_rook(start, end) or has_path_bishop(start, end):
-            Board.board[end.x][end.y] = Square(end.x, end.y, Queen(start.piece.iswhite))
+            Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
+
+    # Move the King
+    elif isinstance(start.piece, King):
+        if start.piece.possible_move(start, end):
+            start.piece.moved = True
+            Board.board[end.x][end.y].piece = start.piece
+            Board.board[start.x][start.y] = Square(start.x, start.y)
+
+    # Move the knight
+    elif isinstance(start.piece, Knight):
+        if start.piece.possible_move(start, end):
+            Board.board[end.x][end.y].piece = start.piece
+            Board.board[start.x][start.y] = Square(start.x, start.y)
+
+    # Move the pawn
+    elif isinstance(start.piece, Pawn):
+        if start.piece.possible_move(start, end) or pawn_can_capture(start, end):
+            start.piece.moved = True
+            Board.board[end.x][end.y].piece = start.piece
+            Board.board[start.x][start.y] = Square(start.x, start.y)
+
+
 
 def main():
     Board.create_board()
@@ -147,7 +182,7 @@ def main():
     Board.board[6][1] = Square(6,1)
     Board.print_board()
 
-    
+    b = Board.board
 
 if __name__ == "__main__":
     main()

@@ -40,10 +40,10 @@ class Pawn(Piece):
             if start.x - end.x == 1:
                 return True
             # The first move can be two squares
-            if start.x - end.x == 1 and not self.moved:
+            if start.x - end.x == 2 and not self.moved:
                 return True
         else:
-            if end.x - start.x == 2:
+            if end.x - start.x == 1:
                 return True
             # The first move can be two squares
             if end.x - start.x == 2 and not self.moved:
