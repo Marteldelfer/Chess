@@ -206,10 +206,10 @@ class King(Piece):
             return False
 
         #Check for regular movement
-        x = abs(start.x - end.x)
-        y = abs(start.y - end.y)
+        x = abs(end.x - start.x)
+        y = abs(end.y - start.y)
 
-        if x == 1 or y == y:
+        if x == 1 or y == 1:
             return True
         
         # TODO Check for castling
