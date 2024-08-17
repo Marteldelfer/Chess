@@ -86,14 +86,12 @@ def has_path_rook(start: Square, end: Square):
     if x != 0:
         for i in range(1, x):
             if not isinstance(Board.board[start.x + i][start.y].piece, EmptySquare):
-                print(type(Board.board[start.x + i][start.y].piece))
                 return False
         return True
     
     #Else, moving in the same line
     for i in range(1, y):
         if not isinstance(Board.board[start.x][start.y + i].piece, EmptySquare):
-            print(type(Board.board[start.x][start.y + i].piece))
             return False
     return True
     
