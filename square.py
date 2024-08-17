@@ -2,7 +2,7 @@ class EmptySquare:
 
     value = 0
 
-    def __str__() -> str:
+    def __str__(self) -> str:
         return '.'
     
     def possible_move(start, end):
@@ -13,7 +13,7 @@ class EmptySquare:
 
 class Square:
 
-    def __init__(self, x, y, piece = EmptySquare) -> None:
+    def __init__(self, x, y, piece = EmptySquare()) -> None:
 
         self.x = x
         self.y = y

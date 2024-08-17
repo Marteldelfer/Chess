@@ -1,4 +1,4 @@
-from square import Square
+from square import *
 from pieces import *
 
 class Board:
@@ -66,10 +66,43 @@ class Board:
                 value += y.piece.value
         return value
 
+
+def has_path_rook(start: Square, end: Square):
+    """
+    Function that takes two squares on the board and verify if
+    there's a clear path in between them for a rook
+    If end square has a piece, it's still considerede a valid
+    path, allowing for captures
+    """
+
+    #See if is a possible move
+    if not start.piece.possible_move(start, end):
+        return False
+
+    x = end.x - start.x
+    y = end.y - start.y
+
+    #If moving in the same column
+    if x != 0:
+        for i in range(1, x):
+            if not isinstance(Board.board[start.x + i][start.y].piece, EmptySquare):
+                print(type(Board.board[start.x + i][start.y].piece))
+                return False
+        return True
+    
+    #Else, moving in the same line
+    for i in range(1, y):
+        if not isinstance(Board.board[start.x][start.y + i].piece, EmptySquare):
+            print(type(Board.board[start.x][start.y + i].piece))
+            return False
+    return True
+    
 def main():
     Board.create_board()
-    Board.print_board()
-    print(Board.board_value())
 
+    Board.board[1][0] = Square(1,0)
+    Board.print_board()
+
+    print(has_path_rook(Board.board[0][0], Board.board[6][0]))
 if __name__ == "__main__":
     main()
