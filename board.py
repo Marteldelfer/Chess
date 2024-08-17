@@ -1,6 +1,13 @@
 from square import *
 from pieces import *
 
+def board_range(num):
+
+    if num > 1:
+        return range(1, num)
+    if num < 0:
+        return range(-1, num, -1)
+
 class Board:
 
     board = []
@@ -84,23 +91,43 @@ def has_path_rook(start: Square, end: Square):
 
     #If moving in the same column
     if x != 0:
-        for i in range(1, x):
+        for i in board_range(x):
             if not isinstance(Board.board[start.x + i][start.y].piece, EmptySquare):
                 return False
         return True
     
     #Else, moving in the same line
-    for i in range(1, y):
+    for i in board_range(y):
         if not isinstance(Board.board[start.x][start.y + i].piece, EmptySquare):
             return False
     return True
+
+def has_path_bishop(start : Square, end : Square):
+
+    if not start.piece.possible_move(start, end):
+        return False
     
+    x = end.x - start.x 
+    y = end.y - start.y
+
+    #Using zip because x and y absolute values are the same
+    for i, j in zip(board_range(x), board_range(y)):
+        if not isinstance(Board.board[start.x + i][start.y + j].piece, EmptySquare):
+            return False
+    return True
+
+
+
 def main():
     Board.create_board()
 
     Board.board[1][0] = Square(1,0)
+    Board.board[1][3] = Square(1,3)
+    Board.board[6][3] = Square(6,3)
     Board.print_board()
 
     print(has_path_rook(Board.board[0][0], Board.board[6][0]))
+    print(has_path_bishop(Board.board[7][2], Board.board[5][4]))
+
 if __name__ == "__main__":
     main()
