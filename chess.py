@@ -14,20 +14,30 @@ def input_decoder(inp : str):
 
     return Board.board[inp[0]][inp[1]], Board.board[inp[2]][inp[3]]
 
-def turn():
+def turn(iswhite: bool):
 
     inp = input('Type your move: \n')
     start, end = input_decoder(inp)
 
-    move_piece(start, end)
+    print(iswhite)
+    if start.piece.iswhite == iswhite:
+        if move_piece(start, end):
+            Board.print_board()
+            return turn(not iswhite)
+        print("Movimento inválido")
+    else:
+        print("Peça inválida")
     Board.print_board()
+    return turn(iswhite)
+
+        
+    
 
 def main():
     Board.create_board()
     Board.print_board()
 
-    while True:
-        turn()
+    turn(True)
 
 if __name__ == "__main__":
     main()

@@ -138,18 +138,21 @@ def move_piece(start: Square, end: Square):
             start.piece.moved = True
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
+            return True
 
     # Move the bishop
     elif isinstance(start.piece, Bishop):
         if has_path_bishop(start, end):
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
+            return True
 
     # Move the queen
     elif isinstance(start.piece, Queen):
         if has_path_rook(start, end) or has_path_bishop(start, end):
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
+            return True
 
     # Move the King
     elif isinstance(start.piece, King):
@@ -157,12 +160,14 @@ def move_piece(start: Square, end: Square):
             start.piece.moved = True
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
+            return True
 
     # Move the knight
     elif isinstance(start.piece, Knight):
         if start.piece.possible_move(start, end):
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
+            return True
 
     # Move the pawn
     elif isinstance(start.piece, Pawn):
@@ -170,7 +175,8 @@ def move_piece(start: Square, end: Square):
             start.piece.moved = True
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
-
+            return True
+    return False
 
 
 def main():
