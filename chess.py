@@ -14,21 +14,17 @@ def input_decoder(inp : str):
 
     return Board.board[inp[0]][inp[1]], Board.board[inp[2]][inp[3]]
 
-def turn(iswhite: bool):
+def turn(x1 ,y1, x2, y2, iswhite):
 
-    inp = input('Type your move: \n')
-    start, end = input_decoder(inp)
+    start = Board.board[x1][y1]
+    end = Board.board[x2][y2]
 
-    print(iswhite)
     if start.piece.iswhite == iswhite:
         if move_piece(start, end):
             Board.print_board()
-            return turn(not iswhite)
-        print("Movimento inválido")
-    else:
-        print("Peça inválida")
+            return True
     Board.print_board()
-    return turn(iswhite)
+    return False
 
         
     
