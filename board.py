@@ -3,6 +3,8 @@ from pieces import *
 
 def board_range(num):
 
+    if num == 0:
+        return []
     if num > 1:
         return range(1, num)
     if num < 0:

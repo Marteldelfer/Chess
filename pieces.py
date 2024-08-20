@@ -169,7 +169,7 @@ class Queen(Piece):
     def possible_move(self, start : Square, end : Square):
 
         #Can't move if the square is ocupied
-        if end.piece.iswhite:
+        if end.piece.iswhite == self.iswhite:
             return False
         
         x = abs(start.x - end.x)
