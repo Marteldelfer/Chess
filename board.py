@@ -5,10 +5,10 @@ def board_range(num):
 
     if num == 0:
         return []
-    if num > 1:
+    if num >= 1:
         return range(1, num)
-    if num < 0:
-        return range(-1, num, -1)
+    if num <= -1:
+        return range(0, num, -1)
 
 class Board:
 
@@ -56,7 +56,7 @@ class Board:
         
     def print_board():
 
-        for x in Board.board:
+        for x in Board.board[::-1]:
             for y in x:
                 print(y, end=' ')
             print()

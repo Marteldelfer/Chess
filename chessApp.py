@@ -34,16 +34,16 @@ class BoardGrid(GridLayout):
         super().__init__(**kwargs)
         self.cols = 8
 
-        for i in range(8):
+        for i in range(7, -1, -1):
             for j in range(8):
                 
                 b = Button()
 
                 if (i + j) % 2 == 0:
-                    b.background_color = (0, .7, .2, 1)
+                    b.background_color = (.9, .9, .9, 1)
                     b.on_press = partial(click, self, i, j)
                 else:
-                    b.background_color = (.9, .9, .9, 1)
+                    b.background_color = (0, .7, .2, 1)
                     b.on_press = partial(click, self, i, j)
                 
                 self.add_widget(b)
