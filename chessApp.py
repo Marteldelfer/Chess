@@ -2,6 +2,10 @@ from chess import *
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.widget import Widget
+from kivy.uix.image import Image
+from kivy.graphics import *
+from kivy.core.window import Window
 from functools import partial
 
 Board.create_board()
@@ -38,17 +42,14 @@ class BoardGrid(GridLayout):
             for j in range(8):
                 
                 b = Button()
+                b.on_press = partial(click, self, i, j)
 
-                if (i + j) % 2 == 0:
-                    b.background_color = (.9, .9, .9, 1)
-                    b.on_press = partial(click, self, i, j)
+                if not isinstance(Board.board[i][j].piece, EmptySquare):
+                    b.background_normal = Board.board[i][j].piece.image
                 else:
-                    b.background_color = (0, .7, .2, 1)
-                    b.on_press = partial(click, self, i, j)
-                
+                    b.background_color = 0,0,0,0
+                    
                 self.add_widget(b)
-
-
 
 
 class ChessApp(App):
