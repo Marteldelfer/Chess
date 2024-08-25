@@ -14,6 +14,13 @@ def input_decoder(inp : str):
 
     return Board.board[inp[0]][inp[1]], Board.board[inp[2]][inp[3]]
 
+def end_turn(iswhite):
+
+    for line in Board.board:
+        for square in line:
+            if square.piece.iswhite != iswhite and isinstance(square.piece, Pawn):
+                square.piece.en_passantable = False
+
 def turn(x1 ,y1, x2, y2, iswhite):
 
     start = Board.board[x1][y1]
@@ -22,6 +29,7 @@ def turn(x1 ,y1, x2, y2, iswhite):
     if start.piece.iswhite == iswhite:
         if move_piece(start, end):
             Board.print_board()
+            end_turn(iswhite)
             print(Board.board_value())
             return True
     Board.print_board()
