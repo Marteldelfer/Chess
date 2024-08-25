@@ -3,6 +3,7 @@ class EmptySquare:
     def __init__(self) -> None:
         self.iswhite = None
         self.value = 0
+        self.image = "images/Clear.png"
 
     def __str__(self) -> str:
         return '.'

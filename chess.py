@@ -24,6 +24,7 @@ def turn(x1 ,y1, x2, y2, iswhite):
             Board.print_board()
             return True
     Board.print_board()
+    print(iswhite)
     return False
 
         
