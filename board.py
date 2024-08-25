@@ -8,7 +8,7 @@ def board_range(num):
     if num >= 1:
         return range(1, num)
     if num <= -1:
-        return range(0, num, -1)
+        return range(-1, num, -1)
 
 class Board:
 
