@@ -54,14 +54,14 @@ class Board:
         Board.board.append(line)
 
         
-    def print_board():
+    def print_board() -> None:
 
         for x in Board.board[::-1]:
             for y in x:
                 print(y, end=' ')
             print()
 
-    def board_value():
+    def board_value() -> int:
         """
         Returns value advantage of the board
         If positive, white has the advantage
@@ -76,7 +76,7 @@ class Board:
         return value
 
 
-def has_path_rook(start: Square, end: Square):
+def has_path_rook(start: Square, end: Square) -> bool:
     """
     Function that takes two squares on the board and verify if
     there's a clear path in between them for a rook
@@ -104,7 +104,7 @@ def has_path_rook(start: Square, end: Square):
             return False
     return True
 
-def has_path_bishop(start : Square, end : Square):
+def has_path_bishop(start : Square, end : Square) -> bool:
     """Same as the has_path_rook, but for the bishop"""
 
     if not start.piece.possible_move(start, end):
@@ -120,7 +120,7 @@ def has_path_bishop(start : Square, end : Square):
     return True
 
 
-def pawn_can_capture(start : Square, end : Square):
+def pawn_can_capture(start : Square, end : Square) -> bool:
 
     x = end.x - start.x
     y = abs(end.y - start.y)
@@ -130,9 +130,18 @@ def pawn_can_capture(start : Square, end : Square):
             return True
         elif not start.piece.iswhite and x == -1 and y == 1:
             return True
+        
+    #Checking for en passant
+    if isinstance(end.piece, EmptySquare) and isinstance(Board.board[start.x][end.y].piece, Pawn):
+        if start.piece.iswhite and y == 1 and x == 1:
+            if Board.board[start.x][end.y].piece.en_passantable:
+                return True 
+        if not start.piece.iswhite and x == -1 and y == 1:
+            if Board.board[start.x][end.y].piece.en_passantable:
+                return True 
     return False
 
-def move_piece(start: Square, end: Square):
+def move_piece(start: Square, end: Square) -> bool:
 
     # Move the rook
     if isinstance(start.piece, Rook):
@@ -175,8 +184,17 @@ def move_piece(start: Square, end: Square):
     elif isinstance(start.piece, Pawn):
         if start.piece.possible_move(start, end) or pawn_can_capture(start, end):
             start.piece.moved = True
+
+            if abs(start.x - end.x) == 2:
+                start.piece.en_passantable = True
+            
+            #if en passant
+            if isinstance(end.piece, EmptySquare):
+                Board.board[start.x][end.y] = Square(start.x, end.y)
+
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
+            print(end.piece.en_passantable)
             return True
     return False
 

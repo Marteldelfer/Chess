@@ -22,6 +22,7 @@ class Pawn(Piece):
         else:
             self.image = "images/PawnBlack.png"
             self.value = -1
+        self.en_passantable = False
 
     def __str__(self) -> str:
         if self.iswhite:

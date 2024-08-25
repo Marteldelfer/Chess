@@ -22,9 +22,9 @@ def turn(x1 ,y1, x2, y2, iswhite):
     if start.piece.iswhite == iswhite:
         if move_piece(start, end):
             Board.print_board()
+            print(Board.board_value())
             return True
     Board.print_board()
-    print(iswhite)
     return False
 
         
