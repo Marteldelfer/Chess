@@ -224,7 +224,7 @@ class King(Piece):
         x = abs(end.x - start.x)
         y = abs(end.y - start.y)
 
-        if x == 1 or y == 1:
+        if x == 1 or y == 1 and not (x > 1 or x > 1):
             return True
         
         # TODO Check for castling
