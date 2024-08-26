@@ -113,6 +113,10 @@ def has_path_bishop(start : Square, end : Square) -> bool:
     x = end.x - start.x 
     y = end.y - start.y
 
+    #verify this for the Queen move
+    if x == 0 or y == 0:
+        return False
+
     #Using zip because x and y absolute values are the same
     for i, j in zip(board_range(x), board_range(y)):
         if not isinstance(Board.board[start.x + i][start.y + j].piece, EmptySquare):
@@ -160,12 +164,16 @@ def move_piece(start: Square, end: Square) -> bool:
 
     # Move the queen
     elif isinstance(start.piece, Queen):
-        if has_path_rook(start, end) or has_path_bishop(start, end):
+        if has_path_rook(start, end):
+            Board.board[end.x][end.y].piece = start.piece
+            Board.board[start.x][start.y] = Square(start.x, start.y)
+            return True
+        elif has_path_bishop(start, end):
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
             return True
 
-    # Move the King
+    # Move the King 
     elif isinstance(start.piece, King):
         if start.piece.possible_move(start, end):
             start.piece.moved = True
@@ -194,7 +202,6 @@ def move_piece(start: Square, end: Square) -> bool:
 
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
-            print(end.piece.en_passantable)
             return True
     return False
 

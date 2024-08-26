@@ -4,7 +4,7 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.graphics import *
 from functools import partial
-from kivy.properties import StringProperty, ListProperty
+from kivy.properties import StringProperty
 
 Board.create_board()
 
@@ -172,7 +172,6 @@ class BoardGrid(GridLayout):
             self.s77 = (Board.board[7][7].piece.image)
 
     def __init__(self, **kwargs):
-
         super().__init__(**kwargs)
         self.cols = 8
 

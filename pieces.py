@@ -142,7 +142,7 @@ class Rook(Piece):
             return 'R'
         return 'r'
 
-    def possible_move(self, start, end):
+    def possible_move(self, start : Square, end : Square):
 
         #Can't move if the square is ocupied
         if end.piece.iswhite == self.iswhite:
@@ -187,7 +187,9 @@ class Queen(Piece):
         y = abs(start.y - end.y)
 
         #Basically, rook and bishop combined
-        if (x == 0 or y == 0) or x == y:
+        if x == y:
+            return True
+        if x == 0 or y == 0:
             return True
         return False
     
