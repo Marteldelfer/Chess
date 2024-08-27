@@ -61,6 +61,14 @@ def turn(x1 ,y1, x2, y2, iswhite):
     start : Square = Board.board[x1][y1]
     end : Square = Board.board[x2][y2]
 
+    #select the pieces to reverse movement if check
+    s_piece = start.piece
+    e_piece = end.piece
+
+    #save piece movement property
+    s_moved = s_piece.moved
+    e_moved = e_piece.moved
+
     if start.piece.iswhite == iswhite:
         if move_piece(start, end):
 
@@ -68,9 +76,11 @@ def turn(x1 ,y1, x2, y2, iswhite):
             if check_for_check(iswhite):
                 Board.print_board()
                 print()
-                #Reverses the movement
-                Board.board[start.x][start.y].piece = Board.board[end.x][end.y].piece
-                Board.board[end.x][end.y] = Square(end.x, end.y)
+                #reverses the movement
+                Board.board[start.x][start.y].piece = s_piece
+                Board.board[end.x][end.y].piece = e_piece
+                Board.board[start.x][start.y].piece.moved = s_moved
+                Board.board[end.x][end.y].piece.moved = e_moved
                 Board.print_board()
                 print("is in check")
                 print()
