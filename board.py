@@ -145,6 +145,34 @@ def pawn_can_capture(start : Square, end : Square) -> bool:
                 return True 
     return False
 
+
+def can_castle(start : Square, end : Square) -> bool:
+
+    x = end.x - start.x
+    y = end.y - start.y
+
+    if start.piece.moved or abs(y) != 2 or x != 0:
+        return False
+    
+    #Find correct rook square and square rook will move to
+    if y > 0:
+        rook_square : Square = Board.board[start.x][7]
+        move_square : Square = Board.board[start.x][start.y + 1]
+    else:
+        rook_square : Square = Board.board[start.x][0]
+        move_square : Square = Board.board[start.x][start.y - 1]  
+    
+    #Verifies if rook_square is rook and has not moved
+    if not isinstance(rook_square.piece, Rook)  or rook_square.piece.moved == True:
+        return False
+    
+    #Verifies path
+    if has_path_rook(rook_square, move_square):
+        move_piece(rook_square, move_square)
+        return True
+    return False
+
+
 def move_piece(start: Square, end: Square) -> bool:
 
     # Move the rook
@@ -175,7 +203,7 @@ def move_piece(start: Square, end: Square) -> bool:
 
     # Move the King 
     elif isinstance(start.piece, King):
-        if start.piece.possible_move(start, end):
+        if start.piece.possible_move(start, end) or can_castle(start, end):
             start.piece.moved = True
             Board.board[end.x][end.y].piece = start.piece
             Board.board[start.x][start.y] = Square(start.x, start.y)
