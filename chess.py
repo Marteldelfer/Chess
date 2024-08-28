@@ -56,6 +56,16 @@ def end_turn(iswhite : bool) -> None:
             if square.piece.iswhite != iswhite and isinstance(square.piece, Pawn):
                 square.piece.en_passantable = False
 
+    #Check for promotions
+    if iswhite:
+        line = 7
+    else:
+        line = 0
+
+    for square in Board.board[line]:
+        if isinstance(square.piece, Pawn):
+            square.piece = Queen(iswhite)
+
 def turn(x1 ,y1, x2, y2, iswhite):
 
     start : Square = Board.board[x1][y1]
