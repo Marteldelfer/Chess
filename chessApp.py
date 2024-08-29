@@ -4,6 +4,7 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.graphics import *
 from functools import partial
+from kivy.core.window import Window
 from kivy.properties import StringProperty
 
 Board.create_board()
@@ -15,6 +16,22 @@ class BoardGrid(GridLayout):
     selected = False
     s_x = None
     s_y = None
+
+    w, h = Window._get_size()
+    print(w, h)
+
+    if w > h:
+        board_size = h
+    else:
+        board_size = w
+    print(w, h)
+    row_force_default = True
+    col_force_default = True
+    row_default_height = board_size / 8
+    col_default_width = board_size / 8
+
+    position_x = (w - board_size) // 2
+    position_y = (h - board_size) // 2
     
     s00 = StringProperty(Board.board[0][0].piece.image)
     s01 = StringProperty(Board.board[0][1].piece.image)

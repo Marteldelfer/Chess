@@ -1,10 +1,13 @@
 #:kivy 2.3
 
 BoardGrid:
+
+    pos: self.position_x, self.position_y
+
     canvas.before:
         Rectangle:
             pos: self.pos
-            size: self.size
+            size: self.board_size, self.board_size
             source: "images/Board.png"
 
     Button:

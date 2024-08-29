@@ -17,10 +17,10 @@ class Pawn(Piece):
 
         #Set value of the piece
         if self.iswhite:
-            self.image = "images/PawnWhite.png"
+            self.image = "images/white-pawn.png"
             self.value = 1
         else:
-            self.image = "images/PawnBlack.png"
+            self.image = "images/black-pawn.png"
             self.value = -1
         self.en_passantable = False
 
@@ -63,10 +63,10 @@ class Bishop(Piece):
         super().__init__(iswhite)
 
         if self.iswhite:
-            self.image = "images/BishopWhite.png"
+            self.image = "images/white-bishop.png"
             self.value = 3
         else:
-            self.image = "images/BishopBlack.png"
+            self.image = "images/black-bishop.png"
             self.value = -3
 
     def __str__(self) -> str:
@@ -96,10 +96,10 @@ class Knight(Piece):
 
         #Set value of the piece
         if self.iswhite:
-            self.image = "images/KnightWhite.png"
+            self.image = "images/white-knight.png"
             self.value = 3
         else:
-            self.image = "images/KnightBlack.png"
+            self.image = "images/black-knight.png"
             self.value = -3
 
     def __str__(self) -> str:
@@ -130,10 +130,10 @@ class Rook(Piece):
 
         #Set value of the piece
         if self.iswhite:
-            self.image = "images/RookWhite.png"
+            self.image = "images/white-rook.png"
             self.value = 5
         else:
-            self.image = "images/RookBlack.png"
+            self.image = "images/black-rook.png"
             self.value = -5
 
     def __str__(self) -> str:
@@ -165,10 +165,10 @@ class Queen(Piece):
 
         #Set value of the piece
         if self.iswhite:
-            self.image = "images/QueenWhite.png"
+            self.image = "images/white-queen.png"
             self.value = 9
         else:
-            self.image = "images/QueenBlack.png"
+            self.image = "images/black-queen.png"
             self.value = -9
 
     def __str__(self) -> str:
@@ -202,10 +202,10 @@ class King(Piece):
 
         #Set value of the piece
         if self.iswhite:
-            self.image = "images/KingWhite.png"
+            self.image = "images/white-king.png"
             self.value = 100
         else:
-            self.image = "images/KingBlack.png"
+            self.image = "images/black-king.png"
             self.value = -100
 
     def __str__(self) -> str:
