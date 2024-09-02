@@ -1,14 +1,21 @@
 from chess import *
 from kivy.app import App
-from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import *
-from functools import partial
 from kivy.core.window import Window
 from kivy.properties import StringProperty
 
 Board.create_board()
 
+class ChessGame(BoxLayout):
+    pass
+
+class Ui(BoxLayout):
+    w, h = Window._get_size()
+    ui_size_x = max(w, h) - min(w, h)
+    ui_size_y = min(w, h)
+    ui_pos_x = min(w, h)
 
 class BoardGrid(GridLayout):
 
@@ -29,9 +36,6 @@ class BoardGrid(GridLayout):
     col_force_default = True
     row_default_height = board_size / 8
     col_default_width = board_size / 8
-
-    position_x = (w - board_size) // 2
-    position_y = (h - board_size) // 2
     
     s00 = StringProperty(Board.board[0][0].piece.image)
     s01 = StringProperty(Board.board[0][1].piece.image)
