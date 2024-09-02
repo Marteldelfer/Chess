@@ -5,6 +5,8 @@ ChessGame:
 
     BoardGrid:
 
+        id: BoardGrid
+
         canvas.before:
             Rectangle:
                 size: self.board_size, self.board_size
@@ -211,10 +213,10 @@ ChessGame:
             on_press: self.parent.click(0, 7)
 
     Ui:
-        text: "Box"
         size_hint: None, None
         size: self.ui_size_x, self.ui_size_y
 
-        Label:
-            text: "Vez das peças..."
-            color:
+        Button:
+            background_normal: BoardGrid.ui_iswhite
+            size_hint: None, None
+            size: self.parent.ui_size_x, self.parent.ui_size_x

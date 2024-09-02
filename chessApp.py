@@ -4,22 +4,17 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import *
 from kivy.core.window import Window
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, BooleanProperty
 
 Board.create_board()
 
 class ChessGame(BoxLayout):
     pass
 
-class Ui(BoxLayout):
-    w, h = Window._get_size()
-    ui_size_x = max(w, h) - min(w, h)
-    ui_size_y = min(w, h)
-    ui_pos_x = min(w, h)
-
 class BoardGrid(GridLayout):
 
     iswhite = True
+    ui_iswhite = StringProperty("images/white-pawn.png")
     selected = False
     s_x = None
     s_y = None
@@ -118,6 +113,10 @@ class BoardGrid(GridLayout):
         else:
             if turn(BoardGrid.s_x, BoardGrid.s_y, x, y, BoardGrid.iswhite):
                 BoardGrid.iswhite = not BoardGrid.iswhite
+                if self.ui_iswhite == "images/white-pawn.png":
+                    self.ui_iswhite = "images/black-pawn.png"
+                else:
+                    self.ui_iswhite = "images/white-pawn.png"
             BoardGrid.selected = False
             
             self.s00 = (Board.board[0][0].piece.image)
@@ -192,9 +191,16 @@ class BoardGrid(GridLayout):
             self.s76 = (Board.board[7][6].piece.image)
             self.s77 = (Board.board[7][7].piece.image)
 
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.cols = 8
+
+class Ui(BoxLayout):
+    w, h = Window._get_size()
+    ui_size_x = max(w, h) - min(w, h)
+    ui_size_y = min(w, h)
+    ui_pos_x = min(w, h)
 
 class ChessApp(App):
     pass
