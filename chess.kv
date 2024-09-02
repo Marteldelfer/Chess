@@ -213,10 +213,19 @@ ChessGame:
             on_press: self.parent.click(0, 7)
 
     Ui:
+
         size_hint: None, None
         size: self.ui_size_x, self.ui_size_y
 
-        Button:
-            background_normal: BoardGrid.ui_iswhite
+        canvas.before:
+            Color: 
+                rgba: .6, .8, .8, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Image:
+            source: BoardGrid.ui_iswhite
+            allow_stretch: True
             size_hint: None, None
             size: self.parent.ui_size_x, self.parent.ui_size_x

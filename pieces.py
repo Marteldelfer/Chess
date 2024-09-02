@@ -8,6 +8,7 @@ class Piece:
         self.moved = False
         self.targeted = False
         self.value = 0
+        self.selected = False
         
 
 class Pawn(Piece):
@@ -18,9 +19,11 @@ class Pawn(Piece):
         #Set value of the piece
         if self.iswhite:
             self.image = "images/white-pawn.png"
+            self.selected_image = "images/white-king.png"
             self.value = 1
         else:
             self.image = "images/black-pawn.png"
+            self.selected_image = "images/white-king.png"
             self.value = -1
         self.en_passantable = False
 
@@ -50,11 +53,13 @@ class Pawn(Piece):
                 return True
             # The first move can be two squares
             if end.x - start.x == 2 and not self.moved:
-                return True 
-            
-        # TODO en passant and capture
-
+                return True
         return False
+    
+    def get_selected_image(self):
+        if self.selected:
+            return self.selected_image
+        return self.image
 
 
 class Bishop(Piece):
@@ -64,9 +69,11 @@ class Bishop(Piece):
 
         if self.iswhite:
             self.image = "images/white-bishop.png"
+            self.selected_image = "images/white-king.png"
             self.value = 3
         else:
             self.image = "images/black-bishop.png"
+            self.selected_image = "images/white-king.png"
             self.value = -3
 
     def __str__(self) -> str:
@@ -87,6 +94,11 @@ class Bishop(Piece):
         if x == y:
             return True
         return False
+    
+    def get_selected_image(self):
+        if self.selected:
+            return self.selected_image
+        return self.image
 
 
 class Knight(Piece):
@@ -97,9 +109,11 @@ class Knight(Piece):
         #Set value of the piece
         if self.iswhite:
             self.image = "images/white-knight.png"
+            self.selected_image = "images/white-king.png"
             self.value = 3
         else:
             self.image = "images/black-knight.png"
+            self.selected_image = "images/white-king.png"
             self.value = -3
 
     def __str__(self) -> str:
@@ -120,6 +134,11 @@ class Knight(Piece):
         if (x == 2 and y == 1) or (y == 2 and x == 1):
             return True
         return False
+    
+    def get_selected_image(self):
+        if self.selected:
+            return self.selected_image
+        return self.image
 
 
 
@@ -131,9 +150,11 @@ class Rook(Piece):
         #Set value of the piece
         if self.iswhite:
             self.image = "images/white-rook.png"
+            self.selected_image = "images/white-king.png"
             self.value = 5
         else:
             self.image = "images/black-rook.png"
+            self.selected_image = "images/white-king.png"
             self.value = -5
 
     def __str__(self) -> str:
@@ -156,6 +177,11 @@ class Rook(Piece):
             return True
         return False
     
+    def get_selected_image(self):
+        if self.selected:
+            return self.selected_image
+        return self.image
+    
 
 
 class Queen(Piece):
@@ -166,9 +192,11 @@ class Queen(Piece):
         #Set value of the piece
         if self.iswhite:
             self.image = "images/white-queen.png"
+            self.selected_image = "images/white-king.png"
             self.value = 9
         else:
             self.image = "images/black-queen.png"
+            self.selected_image = "images/white-king.png"
             self.value = -9
 
     def __str__(self) -> str:
@@ -193,6 +221,11 @@ class Queen(Piece):
             return True
         return False
     
+    def get_selected_image(self):
+        if self.selected:
+            return self.selected_image
+        return self.image
+    
 
 
 class King(Piece):
@@ -203,9 +236,11 @@ class King(Piece):
         #Set value of the piece
         if self.iswhite:
             self.image = "images/white-king.png"
+            self.selected_image = "images/white-king.png"
             self.value = 100
         else:
             self.image = "images/black-king.png"
+            self.selected_image = "images/white-king.png"
             self.value = -100
 
     def __str__(self) -> str:
@@ -230,3 +265,8 @@ class King(Piece):
         # TODO Check for castling
 
         return False
+    
+    def get_selected_image(self):
+        if self.selected:
+            return self.selected_image
+        return self.image

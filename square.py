@@ -5,12 +5,19 @@ class EmptySquare:
         self.moved = None
         self.value = 0
         self.image = "images/Clear.png"
+        self.selected = False
+        self.selected_image = "images/white-king.png"
 
     def __str__(self) -> str:
         return '.'
     
     def possible_move(start, end):
         return False
+    
+    def get_selected_image(self):
+        if self.selected:
+            return self.selected_image
+        return self.image
 
 
 class Square:
