@@ -6,7 +6,7 @@ class EmptySquare:
         self.value = 0
         self.image = "images/Clear.png"
         self.selected = False
-        self.selected_image = "images/white-king.png"
+        self.selected_image = "images/selected-clear.png"
 
     def __str__(self) -> str:
         return '.'
