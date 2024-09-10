@@ -89,6 +89,7 @@ def check_for_checkmate(iswhite):
 
                         Board.board[c][d].piece = end_piece
                         Board.board[a][b].piece = start_piece
+                        print('não foi mate')
                         return False
                     Board.board[a][b].piece.en_passantable = False
     return True
@@ -124,7 +125,8 @@ def turn(x1 ,y1, x2, y2, iswhite, check = False):
             other_iswhite = not iswhite
             if check_for_check(other_iswhite):
                 print('check')
-                check_for_checkmate(other_iswhite)
+                if check_for_checkmate(other_iswhite):
+                    print('checkmate')
             return True
     return False
 

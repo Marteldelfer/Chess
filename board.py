@@ -218,7 +218,9 @@ def move_piece(start: Square, end: Square) -> bool:
 
     # Move the pawn
     elif isinstance(start.piece, Pawn):
-        if start.piece.possible_move(start, end) or pawn_can_capture(start, end):
+        if ((start.piece.possible_move(start, end) and isinstance(end.piece, EmptySquare))
+            or pawn_can_capture(start, end)):
+            
             start.piece.moved = True
 
             if abs(start.x - end.x) == 2:
