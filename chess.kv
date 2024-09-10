@@ -219,7 +219,7 @@ ChessGame:
 
         canvas.before:
             Color: 
-                rgba: .6, .8, .8, 1
+                rgba: .7, .7, .7, 1
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -228,4 +228,5 @@ ChessGame:
             source: BoardGrid.ui_iswhite
             allow_stretch: True
             size_hint: None, None
+            pos_hint: {'center_x': 0.0,'center_y': 0.5}
             size: self.parent.ui_size_x, self.parent.ui_size_x

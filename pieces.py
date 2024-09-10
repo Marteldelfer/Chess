@@ -238,7 +238,4 @@ class King(Piece):
 
         if (x == 1 or y == 1) and (not (x > 1 or y > 1)):
             return True
-        
-        # TODO Check for castling
-
         return False

@@ -1,7 +1,7 @@
 from square import *
 from pieces import *
 
-def board_range(num):
+def board_range(num): #used to verify movements of most pieces
 
     if num == 0:
         return []
@@ -19,8 +19,8 @@ class Board:
         line = [Square(0, 0 ,Rook(True)),
                 Square(0, 1 ,Knight(True)),
                 Square(0, 2 ,Bishop(True)),
-                Square(0, 3 ,King(True)),
-                Square(0, 4 ,Queen(True)),
+                Square(0, 3 ,Queen(True)),
+                Square(0, 4 ,King(True)),
                 Square(0, 5 ,Bishop(True)),
                 Square(0, 6 ,Knight(True)),
                 Square(0, 7 ,Rook(True))]
@@ -46,8 +46,8 @@ class Board:
         line = [Square(7, 0 ,Rook(False)),
                 Square(7, 1 ,Knight(False)),
                 Square(7, 2 ,Bishop(False)),
-                Square(7, 3 ,King(False)),
-                Square(7, 4 ,Queen(False)),
+                Square(7, 3 ,Queen(False)),
+                Square(7, 4 ,King(False)),
                 Square(7, 5 ,Bishop(False)),
                 Square(7, 6 ,Knight(False)),
                 Square(7, 7 ,Rook(False))]
@@ -61,28 +61,7 @@ class Board:
                 print(y, end=' ')
             print()
 
-    def board_value() -> int:
-        """
-        Returns value advantage of the board
-        If positive, white has the advantage
-        If negative, black has the advantage
-        Else, the value is equal
-        """
-
-        value = 0
-        for x in Board.board:
-            for y in x:
-                value += y.piece.value
-        return value
-
-
-def has_path_rook(start: Square, end: Square) -> bool:
-    """
-    Function that takes two squares on the board and verify if
-    there's a clear path in between them for a rook
-    If end square has a piece, it's still considerede a valid
-    path, allowing for captures
-    """
+def has_path_rook(start: Square, end: Square) -> bool: #check if path is clear for rook
 
     #See if is a possible move
     if not start.piece.possible_move(start, end):
@@ -104,8 +83,7 @@ def has_path_rook(start: Square, end: Square) -> bool:
             return False
     return True
 
-def has_path_bishop(start : Square, end : Square) -> bool:
-    """Same as the has_path_rook, but for the bishop"""
+def has_path_bishop(start : Square, end : Square) -> bool: #check if path is clear for bishop
 
     if not start.piece.possible_move(start, end):
         return False
@@ -244,8 +222,6 @@ def main():
     Board.board[6][3] = Square(6,3)
     Board.board[6][1] = Square(6,1)
     Board.print_board()
-
-    b = Board.board
 
 if __name__ == "__main__":
     main()

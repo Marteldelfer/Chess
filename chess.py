@@ -1,20 +1,6 @@
 from pieces import *
 from square import *
 from board import *
-from time import sleep
-
-def input_decoder(inp : str):
-    """Decodes the input and turns into start and end Squares"""
-
-    dec = {"a" : 0, "b" : 1, "c" : 2, "d" : 3,
-           "e" : 4, "f" : 5, "g" : 6, "h" : 7}
-
-    inp = list(inp)
-    inp[0], inp[2] = dec[inp[0]], dec[inp[2]]
-    inp[1], inp[3] = int(inp[1]) - 1, int(inp[3]) - 1
-
-    return Board.board[inp[0]][inp[1]], Board.board[inp[2]][inp[3]]
-
 
 def check_for_check(iswhite : bool) -> bool:
 
@@ -67,7 +53,7 @@ def end_turn(iswhite : bool) -> None:
         if isinstance(square.piece, Pawn):
             square.piece = Queen(iswhite)
 
-
+#checks for all possible moves
 def check_for_checkmate(iswhite):
 
     for a in range(8):
@@ -85,12 +71,13 @@ def check_for_checkmate(iswhite):
                     start_piece = Board.board[a][b].piece
                     end_piece = Board.board[c][d].piece
 
-                    if turn(a, b, c, d, iswhite, True):
+                    if turn(a, b, c, d, iswhite, True): #If turn is possible, it's not mate
 
                         Board.board[c][d].piece = end_piece
                         Board.board[a][b].piece = start_piece
-                        print('não foi mate')
                         return False
+                    
+                    #Garantees that pieces en_passantable is correct
                     Board.board[a][b].piece.en_passantable = False
     return True
 
@@ -120,24 +107,27 @@ def turn(x1 ,y1, x2, y2, iswhite, check = False):
                 Board.board[end.x][end.y].piece.moved = e_moved
                 return False
             
+            #promotions and reset en_passantable
             end_turn(iswhite)
             
+            #check for checkmate on enemy king
             other_iswhite = not iswhite
             if check_for_check(other_iswhite):
-                print('check')
                 if check_for_checkmate(other_iswhite):
-                    print('checkmate')
+                    
+                    #if checkmate, mated king becomes red
+                    for i in range(64):
+                        if (isinstance(Board.board[i//8][i%8].piece, King) and 
+                            Board.board[i//8][i%8].piece.iswhite == other_iswhite):
+
+                            Board.board[i//8][i%8].piece.selected = True
             return True
     return False
 
-        
-    
 
 def main():
     Board.create_board()
     Board.print_board()
-
-    turn(True)
 
 if __name__ == "__main__":
     main()
