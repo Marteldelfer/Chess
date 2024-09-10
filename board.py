@@ -163,7 +163,7 @@ def can_castle(start : Square, end : Square) -> bool:
         move_square : Square = Board.board[start.x][start.y - 1]  
     
     #Verifies if rook_square is rook and has not moved
-    if not isinstance(rook_square.piece, Rook)  or rook_square.piece.moved == True:
+    if (not isinstance(rook_square.piece, Rook)) or rook_square.piece.moved == True:
         return False
     
     #Verifies path
