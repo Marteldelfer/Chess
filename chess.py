@@ -1,6 +1,7 @@
 from pieces import *
 from square import *
 from board import *
+from time import sleep
 
 def input_decoder(inp : str):
     """Decodes the input and turns into start and end Squares"""
@@ -66,6 +67,34 @@ def end_turn(iswhite : bool) -> None:
         if isinstance(square.piece, Pawn):
             square.piece = Queen(iswhite)
 
+
+def check_for_checkmate(iswhite):
+
+    for a in range(8):
+        for b in range(8):
+
+            if isinstance(Board.board[a][b].piece, EmptySquare):
+                        continue
+            if Board.board[a][b].piece.iswhite != iswhite:
+                        continue
+
+            for c in range(8):
+                for d in range(8):
+
+                    if a == c and b == d:
+                        continue
+
+                    start_piece = Board.board[a][b].piece
+                    end_piece = Board.board[c][d].piece
+
+                    if turn(a, b, c, d, iswhite):
+
+                        Board.board[c][d].piece = end_piece
+                        Board.board[a][b].piece = start_piece
+                        return False
+    return True
+
+
 def turn(x1 ,y1, x2, y2, iswhite):
 
     start : Square = Board.board[x1][y1]
@@ -91,14 +120,16 @@ def turn(x1 ,y1, x2, y2, iswhite):
                 Board.board[end.x][end.y].piece = e_piece
                 Board.board[start.x][start.y].piece.moved = s_moved
                 Board.board[end.x][end.y].piece.moved = e_moved
-                Board.print_board()
                 print("is in check")
-                print()
                 return False
             
             end_turn(iswhite)
+            
+            other_iswhite = not iswhite
+            if check_for_check(other_iswhite):
+                print('check')
+                check_for_checkmate(other_iswhite)
             return True
-    Board.print_board()
     return False
 
         

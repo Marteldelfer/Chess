@@ -22,11 +22,14 @@ class EmptySquare:
 
 class Square:
 
-    def __init__(self, x, y, piece = EmptySquare()) -> None:
+    def __init__(self, x, y, piece = None) -> None:
 
         self.x = x
         self.y = y
-        self.piece = piece
+        if piece == None:
+            self.piece = EmptySquare()
+        else:
+            self.piece = piece
         
     def __repr__(self) -> str:
         if self.piece == None:

@@ -108,7 +108,7 @@ class Knight(Piece):
             self.value = 3
         else:
             self.image = "images/black-knight.png"
-            self.selected_image = "images/selected-white-knight.png"
+            self.selected_image = "images/selected-black-knight.png"
             self.value = -3
 
     def __str__(self) -> str:
@@ -143,7 +143,7 @@ class Rook(Piece):
             self.value = 5
         else:
             self.image = "images/black-rook.png"
-            self.selected_image = "images/selected-white-rook.png"
+            self.selected_image = "images/selected-black-rook.png"
             self.value = -5
 
     def __str__(self) -> str:
@@ -179,7 +179,7 @@ class Queen(Piece):
             self.value = 9
         else:
             self.image = "images/black-queen.png"
-            self.selected_image = "images/selected-white-queen.png"
+            self.selected_image = "images/selected-black-queen.png"
             self.value = -9
 
     def __str__(self) -> str:
