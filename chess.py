@@ -2,6 +2,9 @@ from pieces import *
 from square import *
 from board import *
 
+#   Neste módulo, temos regras do jogo em si, como checks, checkmates, promoções e os turnos.
+#   Com algumas pequenas modificações, é possível jogar o jogo neste módulo, através do terminal.
+
 def check_for_check(iswhite : bool) -> bool:
 
     #find the king

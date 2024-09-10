@@ -10,6 +10,10 @@ def board_range(num): #used to verify movements of most pieces
     if num <= -1:
         return range(-1, num, -1)
 
+#O tabuleiro em si. Temos o método create_board(), que preenche o tabuleiro com peças
+#   Nesta classe o movimento de cada peça é verificado e em métodos como has_path_rook e can_castle,
+#além de realizar o movimento propriamente dito
+
 class Board:
 
     board = []

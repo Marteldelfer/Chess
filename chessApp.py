@@ -4,7 +4,13 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import *
 from kivy.core.window import Window
-from kivy.properties import StringProperty, BooleanProperty
+from kivy.properties import StringProperty
+
+#   O app que vai rodar no kivy. Aqui cada parte do projeto se conecta e utilizado.
+#   O tabuleiro em si é um gridLayout 8x8, e cada elemento do gridLayout é uma String property,
+#podendo ser atualizado para alterar a imagem no tabuleiro.
+#   O gridLayout está dentro de um boxLayout, e ao lado há uma imagem para representar o turno do
+#jogador atual
 
 Board.create_board()
 
@@ -20,13 +26,11 @@ class BoardGrid(GridLayout):
     s_y = None
 
     w, h = Window._get_size()
-    print(w, h)
 
     if w > h:
         board_size = h
     else:
         board_size = w
-    print(w, h)
     row_force_default = True
     col_force_default = True
     row_default_height = board_size / 8

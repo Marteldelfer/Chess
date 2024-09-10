@@ -1,3 +1,6 @@
+#   A classe Square representa o quadrado no tabuleiro e armazena uma peça. Caso não tenha nenhuma
+#peça no quadrado, Square amazena um EmptySquare
+
 class EmptySquare:
 
     def __init__(self) -> None:

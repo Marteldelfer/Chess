@@ -1,12 +1,15 @@
 from square import Square
 
+#   Cada peça é uma classe, contendo atributos como iswhite, que determina se a peça é branc ou preta,
+#selected, que serve para mudar a imagem caso a imagem seja selecionada, e o caminho para a imagens 
+#de cada peça.
+
 class Piece:
 
     def __init__(self, iswhite) -> None:
 
         self.iswhite = iswhite
         self.moved = False
-        self.targeted = False
         self.value = 0
         self.selected = False
 
