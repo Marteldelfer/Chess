@@ -72,7 +72,6 @@ def check_for_checkmate(iswhite):
 
     for a in range(8):
         for b in range(8):
-
             if isinstance(Board.board[a][b].piece, EmptySquare):
                         continue
             if Board.board[a][b].piece.iswhite != iswhite:
@@ -80,22 +79,22 @@ def check_for_checkmate(iswhite):
 
             for c in range(8):
                 for d in range(8):
-
                     if a == c and b == d:
                         continue
 
                     start_piece = Board.board[a][b].piece
                     end_piece = Board.board[c][d].piece
 
-                    if turn(a, b, c, d, iswhite):
+                    if turn(a, b, c, d, iswhite, True):
 
                         Board.board[c][d].piece = end_piece
                         Board.board[a][b].piece = start_piece
                         return False
+                    Board.board[a][b].piece.en_passantable = False
     return True
 
 
-def turn(x1 ,y1, x2, y2, iswhite):
+def turn(x1 ,y1, x2, y2, iswhite, check = False):
 
     start : Square = Board.board[x1][y1]
     end : Square = Board.board[x2][y2]
@@ -113,14 +112,11 @@ def turn(x1 ,y1, x2, y2, iswhite):
 
             #if move creates check in it's own king, it's ilegal
             if check_for_check(iswhite):
-                Board.print_board()
-                print()
                 #reverses the movement
                 Board.board[start.x][start.y].piece = s_piece
                 Board.board[end.x][end.y].piece = e_piece
                 Board.board[start.x][start.y].piece.moved = s_moved
                 Board.board[end.x][end.y].piece.moved = e_moved
-                print("is in check")
                 return False
             
             end_turn(iswhite)
