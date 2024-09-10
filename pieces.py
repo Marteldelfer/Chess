@@ -1,6 +1,6 @@
 from square import Square
 
-#   Cada peça é uma classe, contendo atributos como iswhite, que determina se a peça é branc ou preta,
+#   Cada peça é uma classe, contendo atributos como iswhite, que determina se a peça é branca ou preta,
 #selected, que serve para mudar a imagem caso a imagem seja selecionada, e o caminho para a imagens 
 #de cada peça.
 
